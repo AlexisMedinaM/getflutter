@@ -8,6 +8,7 @@ class GFCarousel extends StatefulWidget {
     this.pagerSize,
     this.passiveIndicator,
     this.activeIndicator,
+    this.passiveBorderIndicator,
     this.pagination,
     this.height,
     this.aspectRatio = 16 / 9,
@@ -40,6 +41,9 @@ class GFCarousel extends StatefulWidget {
 
   /// The slider pagination's passive color.
   final Color passiveIndicator;
+
+  /// The slider pagination's border passive color.
+  final Color passiveBorderIndicator;
 
   /// The [GFCarousel] shows pagination on state true.
   final bool pagination;
@@ -300,9 +304,16 @@ class _GFCarouselState extends State<GFCarousel> with TickerProviderStateMixin {
                           height:
                               widget.pagerSize == null ? 8.0 : widget.pagerSize,
                           margin: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 2),
+                              vertical: 10, horizontal: 6),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
+                            border: _current != indexx ? 
+                            Border.all(
+                              width: 2,
+                              color: widget.passiveBorderIndicator == null ? Color(0xff413CA8) : widget.passiveBorderIndicator,
+                              style: BorderStyle.solid
+                            ) : 
+                            null,
                             color: _current == indexx
                                 ? widget.activeIndicator == null
                                     ? const Color.fromRGBO(0, 0, 0, 0.9)
